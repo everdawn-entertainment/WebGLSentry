@@ -44,7 +44,7 @@ class GLProxy {
                     }
                     this.methodCall({
                         name,
-                        arguments,
+                        args,
                     })
                     return result;
                 }.bind(this);
