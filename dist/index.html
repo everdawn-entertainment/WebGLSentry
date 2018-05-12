@@ -4,8 +4,10 @@
   </head>
   <body>
     <script src="everdawn-webglsentry.js"></script>
+    <canvas width="640" height="480" id="mainTarget"></canvas>
     <script type="text/javascript">
-
+        var gl = document.getElementById("mainTarget").getContext("webgl");
+        window.instance = new WebGLSentry(gl);
     </script>
   </body>
 </html>
