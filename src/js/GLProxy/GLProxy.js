@@ -38,6 +38,7 @@ class GLProxy {
                 return function (...args) {
                     let result;
                     try {
+                        console.info(`WebGL -> ${name} -> ${args.join(' , ')}`);
                         result = val.apply(this._real, args);
                     } catch (e) {
                         console.error('WebGL Sentry intercepted a failing WebGL command.', e);
