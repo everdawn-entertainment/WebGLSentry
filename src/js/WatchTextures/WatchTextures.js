@@ -1,8 +1,12 @@
 class WatchTextures {
     constructor (context) {
         context.registerCallback('texImage2D', this.texImage2D, this);
+        context.registerCallback('bindTexture', this.bindTexture, this);
     }
-    texImage2D (target, level, internalformat, format, type, pixels, _format, _type, _pixels) {
+    bindTexture (result, target, texture) {
+
+    }
+    texImage2D (result, target, level, internalformat, format, type, pixels, _format, _type, _pixels) {
         // void gl.texImage2D(target, level, internalformat, format, type, ImageData? pixels);
         if (pixels instanceof ImageData) {
             return;
@@ -24,7 +28,7 @@ class WatchTextures {
             return;
         }
         // void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView? pixels);
-        if (pixels instanceof Number) {
+        if (typeof pixels === 'number') {
             let border = pixels;
             let truePixels = _pixels;
             let trueWidth = format;

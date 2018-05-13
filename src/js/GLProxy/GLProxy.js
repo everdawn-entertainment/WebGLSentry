@@ -10,6 +10,7 @@ class GLProxy {
         this._methodMap = {};
         this._scopeMap = {};
         this._boundRegistration = this.registerCallback.bind(this);
+        this.verbose = false;
     }
     getProxy () {
         return this._proxy;
@@ -38,15 +39,15 @@ class GLProxy {
                 return function (...args) {
                     let result;
                     try {
-                        console.info(`WebGL -> ${name} -> ${args.join(' , ')}`);
+                        if (this.verbose) console.info(`WebGL -> ${name} -> ${args.join(' , ')}`);
                         result = val.apply(this._real, args);
                     } catch (e) {
                         console.error('WebGL Sentry intercepted a failing WebGL command.', e);
                     }
                     this.methodCall({
                         name,
-                        args,
-                    })
+                        args: ([result]).concat(args)
+                    });
                     return result;
                 }.bind(this);
             } break;
@@ -60,7 +61,7 @@ class GLProxy {
         let scope;
         if (method) {
             scope = this._scopeMap[e.name];
-            method.apply(scope ? scope : this, e.arguments);
+            method.apply(scope ? scope : this, e.args);
         }
     }
 }
