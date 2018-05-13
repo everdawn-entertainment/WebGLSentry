@@ -141,10 +141,14 @@
 
 
 				// RENDERER
-
+                var canvas = document.createElement("canvas");
+                //hack
+                WebGLSentry.threeJS();
                 renderer = new THREE.WebGLRenderer( { antialias: true, alpha: false, clearColor: BGCOLOR, maxLights: 8 } );
+                // Create our sentry instance and remap the context.
                 window.instance = new WebGLSentry(renderer.context);
-                renderer.context = window.instance.wrappedContext;
+                renderer.setContext(window.instance.wrappedContext);
+
 				renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
 				renderer.domElement.style.position = "absolute";

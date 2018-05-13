@@ -24,7 +24,7 @@ class WatchTextures {
             return;
         }
         // void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView? pixels);
-        if (pixels instanceof number) {
+        if (pixels instanceof Number) {
             let border = pixels;
             let truePixels = _pixels;
             let trueWidth = format;

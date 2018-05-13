@@ -2,6 +2,7 @@ import Statics from './Statics';
 import ContextMonitor from './ContextMonitor';
 import GLProxy from './GLProxy';
 import WatchTextures from './WatchTextures';
+import { ThreeJS } from './Hacks';
 
 class WebGLSentry {
     constructor (context) {
@@ -11,6 +12,9 @@ class WebGLSentry {
             this.watchers = {};
             this.watchers.textures = new WatchTextures(this.wrappedContext);
         }
+    }
+    static threeJS () {
+        ThreeJS();
     }
     toString () {
         return `${Statics.product} ${Statics.version}`;
